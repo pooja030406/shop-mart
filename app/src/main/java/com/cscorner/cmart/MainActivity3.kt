@@ -11,8 +11,6 @@ import com.cscorner.cmart.databinding.ActivityMain3Binding
 
 class MainActivity3 : AppCompatActivity() {
     private lateinit var binding: ActivityMain3Binding
-    private lateinit var myrecycler: RecyclerView
-    private lateinit var adapter: MyAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

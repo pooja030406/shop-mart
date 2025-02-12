@@ -1,0 +1,26 @@
+package com.cscorner.cmart
+
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.cscorner.cmart.databinding.Element1Binding
+
+class myadapter(val context: MainActivity2, val arr: List<Product>): RecyclerView.Adapter<myadapter.viewholder>() {
+    class viewholder(val binding: Element1Binding): RecyclerView.ViewHolder(binding.root) {
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewholder {
+        val view = Element1Binding.inflate(context.layoutInflater, parent, false)
+        return viewholder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return arr.size
+    }
+
+    override fun onBindViewHolder(holder: viewholder, position: Int) {
+        holder.binding.textView8.text = arr.get(position).title
+        holder.binding.textView9.text = arr.get(position).title
+    }
+
+}
