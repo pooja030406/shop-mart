@@ -23,8 +23,8 @@ class myadapter(val context: MainActivity2, val arr: List<Product>): RecyclerVie
 
             holder.binding.tv9.text = arr.get(arr.size/2+position).title
             holder.binding.tv8.text = arr.get(position).title
-
-
+            holder.binding.textView8.text = arr.get(position).price.toString()
+            holder.binding.textView9.text = arr.get(arr.size/2+position).price.toString()
             Picasso.get().load(arr.get(position).thumbnail).into(holder.binding.iv9)
             Picasso.get().load(arr.get(arr.size/2+position).thumbnail).into(holder.binding.iv8)
 
