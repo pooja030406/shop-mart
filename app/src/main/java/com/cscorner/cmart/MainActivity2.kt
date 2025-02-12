@@ -30,7 +30,6 @@ class MainActivity2 : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        List = emptyList()
         val retrofit = Retrofit.Builder()
             .baseUrl("https://dummyjson.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -40,16 +39,12 @@ class MainActivity2 : AppCompatActivity() {
         retrofitData.enqueue(object : retrofit2.Callback<DATA?> {
             override fun onResponse(p0: Call<DATA?>, p1: Response<DATA?>) {
                 val responseBody = p1.body()!!
-               if(responseBody != null) {
+
                    List = responseBody.products
                    Adapter = myadapter(this@MainActivity2, List)
                    binding.recycler.adapter = Adapter
                    binding.recycler.layoutManager = LinearLayoutManager(this@MainActivity2, LinearLayoutManager.VERTICAL, false)
 
-               }
-                else{
-                    Log.d("failed", "failed to get data" + "null")
-               }
 
             }
 
@@ -67,9 +62,6 @@ class MainActivity2 : AppCompatActivity() {
         binding.imageView5.setOnClickListener {
             startActivity(Intent(this, MainActivity5::class.java))
         }
-        Adapter = myadapter(this@MainActivity2, List)
-        binding.recycler.adapter = Adapter
-        binding.recycler.layoutManager = LinearLayoutManager(this@MainActivity2, LinearLayoutManager.VERTICAL, false)
 
     }
 }
