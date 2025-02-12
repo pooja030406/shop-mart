@@ -19,17 +19,33 @@ class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
     private lateinit var Adapter: myadapter
     private lateinit var List: List<Product>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main2)
-        binding = ActivityMain2Binding.inflate(layoutInflater)
+        binding=ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        setrecyclerview()
+
+        binding.imageView8.setOnClickListener {
+            startActivity(Intent(this, MainActivity4::class.java))
+        }
+        binding.imageView4.setOnClickListener {
+            startActivity(Intent(this, MainActivity3::class.java))
+        }
+        binding.imageView5.setOnClickListener {
+            startActivity(Intent(this, MainActivity5::class.java))
+        }
+
+    }
+    fun setrecyclerview()
+    {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://dummyjson.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -40,10 +56,10 @@ class MainActivity2 : AppCompatActivity() {
             override fun onResponse(p0: Call<DATA?>, p1: Response<DATA?>) {
                 val responseBody = p1.body()!!
 
-                   List = responseBody.products
-                   Adapter = myadapter(this@MainActivity2, List)
-                   binding.recycler.adapter = Adapter
-                   binding.recycler.layoutManager = LinearLayoutManager(this@MainActivity2, LinearLayoutManager.VERTICAL, false)
+                List = responseBody.products
+                Adapter = myadapter(this@MainActivity2, List)
+                binding.recycler.adapter = Adapter
+                binding.recycler.layoutManager = LinearLayoutManager(this@MainActivity2, LinearLayoutManager.VERTICAL, false)
 
 
             }
@@ -52,16 +68,7 @@ class MainActivity2 : AppCompatActivity() {
                 Log.d("Main Activity", "onFailure: " + p1.message)
             }
         })
-
-        binding.imageView8.setOnClickListener {
-            startActivity(Intent(this, MainActivity3::class.java))
-        }
-        binding.imageView4.setOnClickListener {
-            startActivity(Intent(this, MainActivity4::class.java))
-        }
-        binding.imageView5.setOnClickListener {
-            startActivity(Intent(this, MainActivity5::class.java))
-        }
-
     }
+
+
 }
